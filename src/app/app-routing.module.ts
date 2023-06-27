@@ -1,7 +1,32 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { AuthGuard } from './auth.guard';
+import { DetailsComponent } from './details/details.component';
+import { AddempComponent } from './addemp/addemp.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path:"",redirectTo:"/login",pathMatch:"full"
+  },
+  {
+    path:"login",component:LoginComponent
+  },
+  {
+    path:"home",component:HomeComponent,canActivate:[AuthGuard]
+  },
+  {
+    path:"details/:id",component:DetailsComponent,canActivate:[AuthGuard]
+  },
+  {
+    path:"addemp",component:AddempComponent,canActivate:[AuthGuard]
+  },
+  {
+    path:"**",component:NotfoundComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
